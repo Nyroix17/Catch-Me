@@ -224,8 +224,6 @@ Catch-Me/
 │   ├── main.py
 │   ├── requirements.txt
 │   └── INSTALLATION.txt
-│
-└── docs/
 ```
 
 ## Installation et lancement

@@ -225,8 +225,6 @@ Catch-Me/
 │   ├── requirements.txt
 │   └── INSTALLATION.txt
 │
-├── screenshots/
-│
 └── docs/
 ```
 

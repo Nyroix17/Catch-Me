@@ -108,19 +108,23 @@ Cette version constitue la base du gameplay :
 
 **Technologies :** Python, Pygame, Tkinter et SQLite.
 
-### Version 2 — Ajout des fonctionnalités en ligne
+### Version 2 — Évolution du jeu et communication avec le serveur
 
-Cette version enrichit le jeu avec une première communication entre le client et un serveur.
+Cette deuxième version constitue une évolution de la première. Elle introduit une communication avec un serveur distant grâce à des requêtes HTTP et ajoute des fonctionnalités liées aux comptes utilisateurs.
 
-Fonctionnalités présentes dans le code :
+Fonctionnalités :
 - Interface de connexion.
 - Création de compte.
-- Communication HTTP avec le serveur.
-- Récupération des informations du joueur.
-- Synchronisation de la progression et des achats.
-- Consultation d'un classement.
+- Communication entre le client et le serveur via HTTP.
+- Envoi et récupération de données depuis le serveur.
+- Gestion des informations du joueur.
+- Fonctionnalités en ligne, notamment le classement.
 
-**Technologies :** Python, Pygame, Tkinter, Requests et HTTP.
+Cette version marque une première étape dans l'évolution de Catch-Me vers une application connectée.
+
+**Technologies :** Python, Pygame, Requests et HTTP.
+
+*Remarque : la base de données utilisée à l'origine pour cette version n'est plus disponible. Sa structure était probablement proche de celle utilisée dans les versions suivantes, mais cette correspondance n'a pas pu être vérifiée.*
 
 ### Version 3 — Client-serveur
 

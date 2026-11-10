@@ -1,0 +1,40 @@
+CATCH-ME 1.1
+============
+
+POUR JOUER
+----------
+1. Installe Python (python.org), puis les deux modules du jeu :
+       pip install -r requirements.txt
+2. Garde le dossier "themes" a cote de CatchMe.py.
+3. Lance :
+       python CatchMe.py
+4. Cree ton compte avec "Register" (mot de passe : 8 caracteres minimum), puis "Login".
+   Il faut une connexion internet : ta progression est enregistree sur le serveur.
+
+TOUCHES
+-------
+ESC : pause (ou retour)      F11 : plein ecran      F10 : volume du son
+En partie, le bouton || en haut de l'ecran fait la meme chose que ESC.
+
+LE JEU
+------
+- Trois modes : Classique (30 secondes, un maximum de points), Challenge (30 cibles le
+  plus vite possible) et Survie (3 vies, de plus en plus rapide).
+- Des missions chaque jour, des caisses a ouvrir, des themes a debloquer.
+- Tout est explique dans le menu "Instruction".
+
+NOUVEAU DANS LA 1.1
+-------------------
+- Cibles plus grandes, avec un contour et une lueur : elles se voient sur tous les themes.
+- Rater une cible ne retire plus de points (seul le combo retombe a zero).
+- Le combo se perd apres 2 secondes sans toucher de cible (jauge sous le combo).
+- Challenge : le chrono et la limite de 120 secondes sont affiches.
+- Bouton Pause (||) a l'ecran.
+- Boutique : le ralentisseur a 4 niveaux, le premier coute 100 points.
+- Connexion au serveur plus solide.
+- Plus de petit gel a chaque clic (boutique, classement, missions, achats).
+
+SI "SERVEUR INDISPONIBLE" S'AFFICHE
+-----------------------------------
+Le jeu ecrit la raison dans le fichier catchme_erreurs.log, a cote du jeu.
+Envoie ce fichier a la personne qui gere le serveur.

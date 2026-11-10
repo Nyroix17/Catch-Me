@@ -1,0 +1,73 @@
+SERVEUR CATCH-ME 1.2 - MISE EN PLACE
+====================================
+
+1. Arrete l'ancien serveur.
+
+2. Si c'est encore l'ANCIEN serveur (celui avec game.db) qui tourne :
+   supprime game.db, database.db et l'ancien main.py (comptes de test uniquement).
+   Supprime aussi les copies qui trainent ailleurs (telechargements, sauvegardes) :
+   elles contiennent des mots de passe en clair.
+
+   Si tu avais deja installe une version precedente (catchme.db) : garde catchme.db.
+   Le serveur 1.2 la met a jour tout seul au demarrage, sans perdre les comptes.
+   Le ralentisseur passe de 3 a 4 niveaux : les anciens niveaux 1/2/3 deviennent 2/3/4,
+   personne ne perd ce qu'il a achete. Fais quand meme une copie de catchme.db avant.
+
+3. Copie le nouveau main.py et requirements.txt dans le dossier du serveur, puis :
+       pip install -r requirements.txt
+
+4. Lance le serveur comme avant, par exemple :
+       uvicorn main:app --host 127.0.0.1 --port 8000
+   La base catchme.db est creee (ou mise a jour) a cote de main.py.
+   Le serveur n'utilise plus de WebSocket : seulement des requetes HTTPS.
+
+   Nouveau dans la 1.2 : la version Android peut rester connectee sans retaper le mot de
+   passe (adresse /session/resume). Rien ne change pour les jeux PC, la base n'est pas modifiee.
+
+5. Le jeu doit etre CatchMe.py version 1.1 (ou le .exe refait a partir de celui-ci).
+   Le jeu 1.0 et les versions d'avant sont refuses a la connexion avec le message
+   "Version du jeu trop ancienne".
+   Mot de passe des comptes : 8 caracteres minimum.
+
+
+REGLAGES (en haut de main.py)
+-----------------------------
+VERSION_JEU_MIN = 2
+    Version minimum du jeu acceptee. Quand une mise a jour rend l'ancien jeu incompatible,
+    augmente ce nombre ici ET VERSION_JEU dans le jeu : les anciens jeux afficheront
+    un message demandant de telecharger la nouvelle version.
+
+PROXY_DE_CONFIANCE = True
+    A laisser sur True si le serveur n'est joignable que par ton tunnel HTTPS.
+    Mets False si le port du serveur est ouvert directement sur internet.
+    Lance le serveur sur 127.0.0.1 (et pas 0.0.0.0) pour que seul le tunnel y accede.
+
+Regles du jeu (le jeu les recupere a la connexion, inutile de le modifier) :
+    DUREE_RUN, PALIERS_COMBO, BONUS_DOREE, CHANCE_DOREE,
+    CHANCE_BOMBE, PENALITE_BOMBE, PENALITE_RATE, COMBO_DUREE -> les runs
+    BASE_POINTS, AMELIORATIONS, THEMES                      -> points et prix
+    GENRES, CHALLENGE_..., SURVIE_...                       -> les modes Challenge et Survie
+    RUNS_PAR_CAISSE, BUTIN (chances de chaque rarete)       -> les caisses
+    SERIE_POINTS, SERIE_PLAFOND, SERIE_CAISSES              -> la serie de connexion
+    MISSIONS, RECOMPENSES_MISSIONS                          -> les missions du jour
+    Pour ajouter un theme : ajoute sa cle et son prix dans THEMES (meme cle que dans le jeu).
+
+Le jour et la semaine des missions et classements suivent l'heure de la machine du
+serveur (nouveau jour a minuit, nouvelle semaine le lundi).
+
+
+SAUVEGARDE
+----------
+La base est le fichier catchme.db. Selon le disque, il peut y avoir aussi
+catchme.db-wal et catchme.db-shm pendant que le serveur tourne ; s'il n'y a que
+catchme.db, c'est normal aussi (le serveur l'indique au demarrage). Pour une copie propre, serveur en marche :
+       sqlite3 catchme.db ".backup sauvegarde.db"
+Ne modifie pas catchme.db a la main pendant que le serveur tourne.
+
+
+FAIRE EVOLUER LA BASE PLUS TARD
+-------------------------------
+Dans main.py, la liste MIGRATIONS contient les etapes de creation de la base.
+Pour ajouter des tables, on ajoute une etape A LA FIN de la liste. Au redemarrage,
+le serveur applique seulement les etapes manquantes, sans toucher aux comptes.
+Ne modifie jamais une etape deja appliquee.

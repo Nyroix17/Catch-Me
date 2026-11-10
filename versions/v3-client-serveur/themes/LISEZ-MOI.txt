@@ -1,0 +1,9 @@
+Un dossier par theme. Depose dedans (tout est optionnel) :
+  background.png  -> fond du jeu
+  button.png      -> image des boutons
+  target.png      -> la cible a attraper (PNG transparent conseille)
+  target_1.png, target_2.png, ... -> animation image par image
+  target_sheet_60ms.png -> feuille de sprites (cases carrees, 60 ms par image)
+Formats : png, jpg, jpeg, webp, gif, bmp.
+Relance le jeu apres avoir ajoute des images.
+  hit.wav, miss.wav, golden.wav, bomb.wav (ou .ogg) -> les sons du theme
